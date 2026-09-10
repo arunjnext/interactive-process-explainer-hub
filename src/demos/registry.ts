@@ -22,6 +22,18 @@ export const demos: readonly DemoDefinition[] = [
     ],
     load: () => import("./how-explainers-work/HowExplainersWork"),
   },
+  {
+    slug: "page-seo-foundation",
+    title: "How the Page SEO foundation works",
+    summary:
+      "Follow one page from collected evidence to interpretation and a Yes, No or Unknown verdict.",
+    tags: ["seo", "electron", "foundation"],
+    renderer: "hybrid",
+    presentation: "focused",
+    updatedAt: "2026-09-10",
+    sources: [],
+    load: () => import("./page-seo-foundation/PageSeoFoundation"),
+  },
   // demo:new definitions
 ];
 

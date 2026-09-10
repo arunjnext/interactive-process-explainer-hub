@@ -27,22 +27,31 @@ export function DemoPage() {
 
   return (
     <article>
-      <header className={styles.demoHeader}>
+      <header
+        className={styles.demoHeader}
+        data-focused={demo.presentation === "focused"}
+      >
         <Link className={styles.backLink} to="/">
           ← All demos
         </Link>
-        <div className={styles.metaRow}>
-          <RendererBadge renderer={demo.renderer} />
-          <span>Updated {demo.updatedAt}</span>
-        </div>
+        {demo.presentation !== "focused" && (
+          <div className={styles.metaRow}>
+            <RendererBadge renderer={demo.renderer} />
+            <span>Updated {demo.updatedAt}</span>
+          </div>
+        )}
         <h1>{demo.title}</h1>
-        <p>{demo.summary}</p>
-        <nav className={styles.jumpLinks} aria-label="Explainer sections">
-          <a href="#eli5">Mental model</a>
-          <a href="#technical">Source map</a>
-          <a href="#dry-run">Dry run</a>
-          <a href="#edge-case">Safety</a>
-        </nav>
+        {demo.presentation !== "focused" && (
+          <>
+            <p>{demo.summary}</p>
+            <nav className={styles.jumpLinks} aria-label="Explainer sections">
+              <a href="#eli5">Mental model</a>
+              <a href="#technical">Source map</a>
+              <a href="#dry-run">Dry run</a>
+              <a href="#edge-case">Safety</a>
+            </nav>
+          </>
+        )}
       </header>
       <Suspense fallback={<p className={styles.loading}>Loading explainer…</p>}>
         {createElement(Demo)}

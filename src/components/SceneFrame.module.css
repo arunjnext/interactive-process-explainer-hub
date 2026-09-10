@@ -8,6 +8,16 @@
   background: var(--panel);
   box-shadow: var(--shadow);
 }
+.frame[data-compact="true"] {
+  padding: 0;
+  border: 0;
+  box-shadow: none;
+}
+.frame[data-compact="true"] .viewport,
+.frame[data-compact="true"] .viewport canvas {
+  min-height: 22rem;
+  height: 22rem !important;
+}
 
 .heading {
   display: flex;

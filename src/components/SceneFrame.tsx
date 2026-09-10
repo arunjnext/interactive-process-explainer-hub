@@ -5,6 +5,7 @@ import { Component, Suspense, useMemo, type ErrorInfo } from "react";
 import styles from "./SceneFrame.module.css";
 
 interface SceneFrameProps {
+  compact?: boolean;
   title: string;
   description: string;
   children: ReactNode;
@@ -49,6 +50,7 @@ function canUseWebGL() {
 }
 
 export function SceneFrame({
+  compact = false,
   title,
   description,
   children,
@@ -57,15 +59,19 @@ export function SceneFrame({
   const webGLAvailable = useMemo(() => canUseWebGL(), []);
 
   return (
-    <figure className={styles.frame} aria-label={title}>
-      <div className={styles.heading}>
-        <div>
-          <p className={styles.kicker}>Live process model</p>
-          <h2>{title}</h2>
-        </div>
-        <span className={styles.liveBadge}>Simulation</span>
-      </div>
-      <p className={styles.description}>{description}</p>
+    <figure className={styles.frame} data-compact={compact} aria-label={title}>
+      {!compact && (
+        <>
+          <div className={styles.heading}>
+            <div>
+              <p className={styles.kicker}>Live process model</p>
+              <h2>{title}</h2>
+            </div>
+            <span className={styles.liveBadge}>Simulation</span>
+          </div>
+          <p className={styles.description}>{description}</p>
+        </>
+      )}
       <div className={styles.viewport} data-testid="scene-viewport">
         {webGLAvailable ? (
           <SceneErrorBoundary fallback={fallback}>

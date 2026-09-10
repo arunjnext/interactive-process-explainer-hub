@@ -17,6 +17,7 @@ export interface DemoDefinition {
   summary: string;
   tags: readonly string[];
   renderer: RendererKind;
+  presentation?: "focused";
   updatedAt: string;
   sources: readonly SourceReference[];
   load: () => Promise<{ default: ComponentType }>;
