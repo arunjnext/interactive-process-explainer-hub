@@ -2,6 +2,7 @@ import { createElement, Suspense } from "react";
 import { Link, useParams } from "react-router-dom";
 
 import { RendererBadge } from "../components/RendererBadge";
+import { Button } from "../components/ui/button";
 import { demoComponents, findDemo } from "../demos/registry";
 import styles from "./DemoPage.module.css";
 
@@ -19,9 +20,7 @@ export function DemoPage() {
           Check the URL, or return to the gallery to inspect the available
           processes.
         </p>
-        <Link className="button button--primary" to="/">
-          Return to all demos
-        </Link>
+        <Button render={<Link to="/" />}>Return to all demos</Button>
       </section>
     );
   }

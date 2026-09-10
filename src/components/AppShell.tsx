@@ -1,7 +1,9 @@
 import type { ReactNode } from "react";
+import { Moon, Sun } from "lucide-react";
 import { Link } from "react-router-dom";
 
 import { useTheme } from "../hooks/useTheme";
+import { Button } from "./ui/button";
 import styles from "./AppShell.module.css";
 
 export function AppShell({ children }: { children: ReactNode }) {
@@ -31,14 +33,20 @@ export function AppShell({ children }: { children: ReactNode }) {
           <a href="https://github.com/arunjnext/interactive-process-explainer-hub">
             GitHub
           </a>
-          <button
+          <Button
+            variant="outline"
+            size="sm"
             type="button"
             onClick={toggleTheme}
             aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} theme`}
           >
-            <span aria-hidden="true">{theme === "dark" ? "☼" : "◐"}</span>
+            {theme === "dark" ? (
+              <Sun data-icon="inline-start" aria-hidden="true" />
+            ) : (
+              <Moon data-icon="inline-start" aria-hidden="true" />
+            )}
             {theme === "dark" ? "Light" : "Dark"}
-          </button>
+          </Button>
         </nav>
       </header>
       <main id="main-content" className={styles.main}>

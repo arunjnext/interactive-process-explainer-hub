@@ -8,11 +8,20 @@ A public gallery of truthful, interactive explanations for difficult technical p
 
 - React, TypeScript, and Vite
 - Three.js through React Three Fiber and Drei
-- CSS modules and shared observatory design tokens
+- shadcn `base-nova` primitives on Base UI, Tailwind CSS v4, and Lucide icons
+- The complete SerpLens light/dark token system with Geist and Geist Mono
 - Vitest, Testing Library, and Playwright
 - Vercel production and GitHub Actions preview deployments
 
 Three.js is used only when spatial relationships or animated state transitions materially improve the explanation. Prose, source maps, controls, tables, and fallbacks remain semantic DOM.
+
+The SerpLens token copy lives in `src/styles/serplens-theme.css`. Shared controls are installed through shadcn into `src/components/ui`; layout and explainer-specific compositions remain in CSS modules and resolve colors, radii, shadows, typography, and motion through those shared tokens.
+
+Add another shadcn primitive with:
+
+```bash
+pnpm dlx shadcn@latest add <component>
+```
 
 ## Local development
 

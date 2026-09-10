@@ -2,6 +2,16 @@ import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 
 import { RendererBadge } from "../components/RendererBadge";
+import { Button } from "../components/ui/button";
+import { Card } from "../components/ui/card";
+import { Input } from "../components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../components/ui/select";
 import { demos } from "../demos/registry";
 import type { RendererKind } from "../types/demo";
 import styles from "./GalleryPage.module.css";
@@ -56,7 +66,7 @@ export function GalleryPage() {
         <div className={styles.filters}>
           <label>
             <span>Search explainers</span>
-            <input
+            <Input
               value={query}
               onChange={(event) => setQuery(event.target.value)}
               placeholder="Search by title, topic, or tag"
@@ -64,24 +74,27 @@ export function GalleryPage() {
           </label>
           <label>
             <span>Renderer</span>
-            <select
+            <Select
               value={renderer}
-              onChange={(event) =>
-                setRenderer(event.target.value as RendererFilter)
-              }
+              onValueChange={(value) => setRenderer(value as RendererFilter)}
             >
-              <option value="all">All renderers</option>
-              <option value="hybrid">Hybrid</option>
-              <option value="dom">DOM / SVG</option>
-              <option value="three">Three.js</option>
-            </select>
+              <SelectTrigger aria-label="Renderer">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All renderers</SelectItem>
+                <SelectItem value="hybrid">Hybrid</SelectItem>
+                <SelectItem value="dom">DOM / SVG</SelectItem>
+                <SelectItem value="three">Three.js</SelectItem>
+              </SelectContent>
+            </Select>
           </label>
         </div>
 
         {filteredDemos.length > 0 ? (
           <div className={styles.grid}>
             {filteredDemos.map((demo, index) => (
-              <article className={styles.card} key={demo.slug}>
+              <Card className={styles.card} key={demo.slug}>
                 <div className={styles.cardIndex}>
                   {String(index + 1).padStart(2, "0")}
                 </div>
@@ -102,14 +115,15 @@ export function GalleryPage() {
                 >
                   Open explainer <span aria-hidden="true">↗</span>
                 </Link>
-              </article>
+              </Card>
             ))}
           </div>
         ) : (
           <div className={styles.empty}>
             <h3>No matching signals</h3>
             <p>Try a broader search or reset the renderer filter.</p>
-            <button
+            <Button
+              variant="outline"
               type="button"
               onClick={() => {
                 setQuery("");
@@ -117,7 +131,7 @@ export function GalleryPage() {
               }}
             >
               Reset filters
-            </button>
+            </Button>
           </div>
         )}
       </section>

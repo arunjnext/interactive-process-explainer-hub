@@ -5,7 +5,9 @@ import type { Mesh } from "three";
 
 import { LessonSection } from "../../components/LessonSection";
 import { SceneFrame } from "../../components/SceneFrame";
+import { Button } from "../../components/ui/button";
 import { useReducedMotion } from "../../hooks/useReducedMotion";
+import { serplensScenePalettes } from "../../lib/serplens-scene-palette";
 import styles from "./HowExplainersWork.module.css";
 
 interface Stage {
@@ -90,10 +92,12 @@ function SignalPath({
   activeStep,
   replayNonce,
   reducedMotion,
+  palette,
 }: {
   activeStep: number;
   replayNonce: number;
   reducedMotion: boolean;
+  palette: (typeof serplensScenePalettes)[keyof typeof serplensScenePalettes];
 }) {
   const packet = useRef<Mesh>(null);
   const target = positions[activeStep];
@@ -120,9 +124,17 @@ function SignalPath({
   return (
     <>
       <ambientLight intensity={0.85} />
-      <pointLight position={[0, 4, 4]} intensity={35} color="#75f7d0" />
-      <pointLight position={[3, -2, 2]} intensity={22} color="#a799ff" />
-      <Line points={positions} color="#36564f" lineWidth={1.2} />
+      <pointLight
+        position={[0, 4, 4]}
+        intensity={35}
+        color={palette.agentPrimary}
+      />
+      <pointLight
+        position={[3, -2, 2]}
+        intensity={22}
+        color={palette.agentSecondary}
+      />
+      <Line points={positions} color={palette.border} lineWidth={1.2} />
       {positions.map((position, index) => {
         const completed = index < activeStep;
         const active = index === activeStep;
@@ -134,8 +146,14 @@ function SignalPath({
           >
             <icosahedronGeometry args={[0.26, 1]} />
             <meshStandardMaterial
-              color={active ? "#70f7cf" : completed ? "#537c70" : "#1d2e2a"}
-              emissive={active ? "#2fe0ad" : "#000000"}
+              color={
+                active
+                  ? palette.agentPrimary
+                  : completed
+                    ? palette.agentBorder
+                    : palette.agentSurface
+              }
+              emissive={active ? palette.agentPrimary : palette.background}
               emissiveIntensity={active ? 1.1 : 0}
               roughness={0.35}
             />
@@ -145,8 +163,8 @@ function SignalPath({
       <mesh ref={packet}>
         <octahedronGeometry args={[0.18, 0]} />
         <meshStandardMaterial
-          color="#d8d2ff"
-          emissive="#8a78ff"
+          color={palette.agentAccent}
+          emissive={palette.agentAccent}
           emissiveIntensity={1.4}
         />
       </mesh>
@@ -186,7 +204,19 @@ export default function HowExplainersWork() {
   const [caseMode, setCaseMode] = useState<"normal" | "boundary">("normal");
   const [complexity, setComplexity] = useState(4);
   const reducedMotion = useReducedMotion();
+  const [sceneTheme, setSceneTheme] = useState<"dark" | "light">(() =>
+    document.documentElement.classList.contains("dark") ? "dark" : "light",
+  );
   const activeStage = stages[activeStep];
+
+  useEffect(() => {
+    const root = document.documentElement;
+    const observer = new MutationObserver(() => {
+      setSceneTheme(root.classList.contains("dark") ? "dark" : "light");
+    });
+    observer.observe(root, { attributes: true, attributeFilter: ["class"] });
+    return () => observer.disconnect();
+  }, []);
 
   const trace = useMemo(() => {
     const sourceCount =
@@ -219,6 +249,7 @@ export default function HowExplainersWork() {
           activeStep={activeStep}
           replayNonce={replayNonce}
           reducedMotion={reducedMotion}
+          palette={serplensScenePalettes[sceneTheme]}
         />
       </SceneFrame>
 
@@ -297,7 +328,8 @@ export default function HowExplainersWork() {
         <ol className={styles.pipeline}>
           {stages.map((stage, index) => (
             <li key={stage.short} data-active={index === activeStep}>
-              <button
+              <Button
+                variant="ghost"
                 type="button"
                 onClick={() => goToStep(index)}
                 aria-pressed={index === activeStep}
@@ -305,7 +337,7 @@ export default function HowExplainersWork() {
                 <span>{String(index + 1).padStart(2, "0")}</span>
                 <strong>{stage.title}</strong>
                 <small>{stage.output}</small>
-              </button>
+              </Button>
             </li>
           ))}
         </ol>
@@ -346,20 +378,22 @@ export default function HowExplainersWork() {
             <fieldset>
               <legend>Case</legend>
               <div className={styles.segmented}>
-                <button
+                <Button
+                  variant="ghost"
                   type="button"
                   aria-pressed={caseMode === "normal"}
                   onClick={() => setCaseMode("normal")}
                 >
                   Normal
-                </button>
-                <button
+                </Button>
+                <Button
+                  variant="ghost"
                   type="button"
                   aria-pressed={caseMode === "boundary"}
                   onClick={() => setCaseMode("boundary")}
                 >
                   Boundary
-                </button>
+                </Button>
               </div>
             </fieldset>
             <label className={styles.rangeLabel}>
@@ -375,28 +409,31 @@ export default function HowExplainersWork() {
               />
             </label>
             <div className={styles.buttonRow}>
-              <button
+              <Button
+                variant="outline"
                 type="button"
                 onClick={() => goToStep(activeStep - 1)}
                 disabled={activeStep === 0}
               >
                 Previous
-              </button>
-              <button
+              </Button>
+              <Button
                 className={styles.primaryButton}
                 type="button"
                 onClick={() => goToStep(activeStep + 1)}
                 disabled={activeStep === stages.length - 1}
               >
                 Next step
-              </button>
-              <button
+              </Button>
+              <Button
+                variant="outline"
                 type="button"
                 onClick={() => setReplayNonce((value) => value + 1)}
               >
                 Replay
-              </button>
-              <button
+              </Button>
+              <Button
+                variant="ghost"
                 type="button"
                 onClick={() => {
                   setActiveStep(0);
@@ -405,7 +442,7 @@ export default function HowExplainersWork() {
                 }}
               >
                 Reset
-              </button>
+              </Button>
             </div>
           </div>
           <div className={styles.tracePanel}>

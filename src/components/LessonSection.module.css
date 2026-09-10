@@ -17,7 +17,7 @@
 
 .eyebrow {
   margin: 0;
-  color: var(--accent);
+  color: var(--agent-2);
   font-family: "DM Mono", ui-monospace, monospace;
   font-size: 0.67rem;
   letter-spacing: 0.12em;
@@ -33,7 +33,7 @@
 .description {
   max-width: 48rem;
   margin: 0;
-  color: var(--muted);
+  color: var(--muted-foreground);
 }
 
 .body {

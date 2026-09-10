@@ -1,0 +1,736 @@
+/*
+ * @serplens/ui — shared Tailwind v4 design-token layer.
+ *
+ * The single source of truth for SERP Lens design tokens (color, radii, type,
+ * spacing, shadow, motion) plus the light/dark custom-property values they
+ * resolve against. Imported by each consuming app's Tailwind entry
+ * (`@import '@serplens/ui/styles/theme.css'`) — the app still owns the single
+ * Tailwind compile (`@import 'tailwindcss'`, plugins, tw-animate-css) and its
+ * own app-only CSS (fonts, Electron/runtime utilities, feature assets).
+ *
+ * Content scanning stays per-consumer: this file carries its OWN @source so the
+ * package's own primitives are scanned wherever it's imported (Tailwind v4
+ * resolves @source relative to the declaring file and skips node_modules by
+ * default). `../` reaches the package `src/` root from this `src/styles/` file.
+ */
+@source '../**/*.{ts,tsx}';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  --font-mono: "Geist Mono", ui-monospace, monospace;
+  /* The full ladder, declared even where it equals Tailwind's default, so no
+	   step has to be looked up elsewhere. Roles follow shadcn's base-nova:
+	   `md` rounds items inside a floating surface, `lg` rounds the surfaces and
+	   form controls themselves. */
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 10px;
+  --radius-2xl: 12px;
+  --radius-3xl: 22px;
+  --radius-4xl: 26px;
+
+  /* Each size carries its own leading so no consumer has to pair a size with a
+	   `leading-*` class. Overriding --text-* alone leaves Tailwind's default
+	   leading for that step, which is what forced `leading-[18px]` everywhere. */
+  --text-xs--line-height: 16px;
+  --text-sm: 13px;
+  --text-sm--line-height: 18px;
+  --text-md: 14px;
+  --text-md--line-height: 20px;
+  --text-base: 15px;
+  --text-base--line-height: 22px;
+  --text-lg: 16px;
+  --text-lg--line-height: 24px;
+
+  --width-340: 22rem;
+  --width-400: 400px;
+  --width-532: 532px;
+  --width-825: 825px;
+
+  --height-600: 600px;
+
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+
+  --color-background: var(--background);
+  --color-background-alt: var(--background-alt);
+  --color-background-light: var(--background-light);
+  --color-light: var(--light);
+
+  --color-glass: var(--glass);
+  --color-glass-light: var(--glass-light);
+  --color-glass-dark: var(--glass-dark);
+
+  --color-border: var(--border);
+  --color-border-soft: var(--border-soft);
+
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-card-muted: var(--card-muted);
+  --color-panel: var(--panel);
+
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
+  --color-foreground: var(--foreground);
+  --color-input: var(--input);
+
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted-foreground-icon: var(--muted-foreground-icon);
+  --color-muted-foreground-subtle: var(--muted-foreground-subtle);
+
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-destructive-foreground-tint: var(--destructive-foreground-tint);
+  --color-destructive-bg: var(--destructive-bg);
+
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+
+  --color-default: var(--default);
+  --color-default-foreground: var(--default-foreground);
+
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-brand: var(--brand);
+  --color-ring: var(--ring);
+  --color-ring-offset: var(--ring-offset);
+
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-background: var(--sidebar-background);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-success-bg: var(--success-bg);
+  --color-success-border: var(--success-border);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-warning-secondary: var(--warning-secondary);
+  --color-warning-bg: var(--warning-bg);
+  --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
+  --color-control: var(--control);
+  --color-field-control: var(--field-control);
+  --color-omnibar: var(--omnibar);
+  --color-track: var(--track);
+  --color-score-caution: var(--score-caution);
+  --color-background-vibrant: var(--background-vibrant);
+  --color-accent-overlay: var(--accent-overlay);
+  --color-muted-overlay: var(--muted-overlay);
+  --color-border-overlay: var(--border-overlay);
+  --color-agent-1: var(--agent-1);
+  --color-agent-1-bg: var(--agent-1-bg);
+  --color-agent-1-border: var(--agent-1-border);
+  --color-agent-2: var(--agent-2);
+  --color-agent-2-bg: var(--agent-2-bg);
+  --color-agent-2-border: var(--agent-2-border);
+  --color-agent-3: var(--agent-3);
+  --color-agent-3-bg: var(--agent-3-bg);
+  --color-agent-3-border: var(--agent-3-border);
+  --color-agent-4: var(--agent-4);
+  --color-agent-4-bg: var(--agent-4-bg);
+  --color-agent-4-border: var(--agent-4-border);
+  --color-agent-5: var(--agent-5);
+  --color-agent-5-bg: var(--agent-5-bg);
+  --color-agent-5-border: var(--agent-5-border);
+  --color-alpha-50: var(--alpha-50);
+  --color-custom-background-dark-input-30: var(
+    --custom-background-dark-input-30
+  );
+  --color-custom-transparent-dark-input-30: var(
+    --custom-transparent-dark-input-30
+  );
+  --color-custom-transparent: var(--custom-transparent);
+  --color-custom-background-dark-calendar-30: var(
+    --custom-background-dark-calendar-30
+  );
+  --color-custom-accent-dark-input-50: var(--custom-accent-dark-input-50);
+  --color-custom-accent-dark-calendar-50: var(--custom-accent-dark-calendar-50);
+  --color-custom-input-dark-input-80: var(--custom-input-dark-input-80);
+  --color-custom-input-dark-input-30: var(--custom-input-dark-input-30);
+  --color-custom-input-50-dark-input-80: var(--custom-input-50-dark-input-80);
+  --color-custom-input-30-dark-transparent: var(
+    --custom-input-30-dark-transparent
+  );
+  --color-custom-input-30-dark-input-30: var(--custom-input-30-dark-input-30);
+  --color-custom-muted-dark-input-50: var(--custom-muted-dark-input-50);
+  --color-custom-destructive-dark-destructive-60: var(
+    --custom-destructive-dark-destructive-60
+  );
+  --color-custom-destructive-dark-destructive-70: var(
+    --custom-destructive-dark-destructive-70
+  );
+  --color-custom-destructive-dark-destructive-90: var(
+    --custom-destructive-dark-destructive-90
+  );
+  --color-custom-destructive-10-dark-destructive-20: var(
+    --custom-destructive-10-dark-destructive-20
+  );
+  --color-custom-destructive-20-dark-destructive-40: var(
+    --custom-destructive-20-dark-destructive-40
+  );
+  --color-custom-destructive-20-dark-destructive-30: var(
+    --custom-destructive-20-dark-destructive-30
+  );
+  --color-custom-destructive-40-dark-destructive-60: var(
+    --custom-destructive-40-dark-destructive-60
+  );
+  --color-custom-destructive-40-dark-destructive-40: var(
+    --custom-destructive-40-dark-destructive-40
+  );
+  --color-custom-amber-900-dark-amber-50: var(--custom-amber-900-dark-amber-50);
+  --color-custom-amber-50-dark-amber-950: var(--custom-amber-50-dark-amber-950);
+  --color-custom-amber-200-dark-amber-900: var(
+    --custom-amber-200-dark-amber-900
+  );
+  --color-custom-neutral-800-dark-neutral-300: var(
+    --custom-neutral-800-dark-neutral-300
+  );
+  --color-custom-dark-input: var(--custom-dark-input);
+  --color-custom-outline: var(--custom-outline);
+  --color-custom-outline-10-dark-outline-20: var(
+    --custom-outline-10-dark-outline-20
+  );
+  --color-custom-blue-500-dark-blue-600: var(--custom-blue-500-dark-blue-600);
+  --color-custom-border-dark-input-dark: var(--custom-border-dark-input-dark);
+  --color-custom-ring-dark-input-dark: var(--custom-ring-dark-input-dark);
+  --color-custom-ring-dark-input-dark-2: var(--custom-ring-dark-input-dark-2);
+  --color-custom-popover-70: var(--custom-popover-70);
+  --color-custom-foreground-10: var(--custom-foreground-10);
+  --color-custom-ring-dark-input-dark-3: var(--custom-ring-dark-input-dark-3);
+  --color-custom-bg-background-20-dark-bg-background-10: var(
+    --custom-bg-background-20-dark-bg-background-10
+  );
+  --color-custom-bg-primary-5-dark-bg-primary-10: var(
+    --custom-bg-primary-5-dark-bg-primary-10
+  );
+  --color-custom-alpha-30-dark-alpha-20: var(--custom-alpha-30-dark-alpha-20);
+
+  --shadow-*: initial;
+  --shadow-2xs: 0 1px 1px oklch(0 0 0 / 0.03);
+  --shadow-ring-2xs:
+    0 1px 1px 0 var(--shadow-xs-color), 0 0 0 1px var(--ring-hairline);
+  --shadow-xs: 0 1px 2px 0 oklch(0 0 0 / 0.05);
+  --drop-shadow-*: initial;
+  --drop-shadow-xs: var(--shadow-xs-offset-x) var(--shadow-xs-offset-y)
+    var(--shadow-xs-blur-radius) var(--shadow-xs-color);
+  --shadow-ring-xs:
+    0 1px 2px 0 var(--shadow-xs-color), 0 0 0 1px var(--ring-hairline);
+  --shadow-ring-input:
+    0 1px 2px 0 var(--shadow-xs-color), 0 0 0 1px var(--ring-hairline);
+  --shadow-sm: 0 1px 2px oklch(0 0 0 / 0.08);
+  --shadow-ring-sm:
+    0 0 0 1px var(--ring-hairline),
+    var(--shadow-sm-1-offset-x, 0) var(--shadow-sm-1-offset-y, 1px)
+      var(--shadow-sm-1-blur-radius, 3px) var(--shadow-sm-1-spread-radius, 0)
+      var(--shadow-sm-1-color, oklch(0 0 0 / 0.1)),
+    var(--shadow-sm-2-offset-x, 0) var(--shadow-sm-2-offset-y, 1px)
+      var(--shadow-sm-2-blur-radius, 2px) var(--shadow-sm-2-spread-radius, -1px)
+      var(--shadow-sm-2-color, oklch(0 0 0 / 0.1));
+  --shadow:
+    0 0 0 1px oklch(0 0 0 / 0.04), 0 2px 2px oklch(0 0 0 / 0.08),
+    0 2px 3px oklch(0 0 0 / 0.04);
+  --shadow-md:
+    0 0 0 1px oklch(0 0 0 / 0.04), 0 2px 4px oklch(0 0 0 / 0.1),
+    0 4px 6px oklch(0 0 0 / 0.04);
+  --shadow-ring-md:
+    0 0 0 1px var(--ring-hairline), 0 2px 4px -2px var(--shadow-md-2-color),
+    0 4px 6px -1px var(--shadow-md-1-color);
+  --shadow-ring-hard-md:
+    0 0 0 1px var(--ring-hairline),
+    var(--shadow-md-1-offset-x, 0) var(--shadow-md-1-offset-y, 4px)
+      var(--shadow-md-1-blur-radius, 6px) var(--shadow-md-1-spread-radius, -1px)
+      var(--shadow-md-1-color, oklch(0 0 0 / 0.1)),
+    var(--shadow-md-2-offset-x, 0) var(--shadow-md-2-offset-y, 2px)
+      var(--shadow-md-2-blur-radius, 4px) var(--shadow-md-2-spread-radius, -2px)
+      var(--shadow-md-2-color, oklch(0 0 0 / 0.1));
+  --shadow-lg:
+    0 0 0 1px oklch(0 0 0 / 0.04), 0 4px 6px oklch(0 0 0 / 0.1),
+    0 8px 12px oklch(0 0 0 / 0.05);
+  --shadow-xl:
+    0 0 0 1px oklch(0 0 0 / 0.04), 0 8px 12px oklch(0 0 0 / 0.1),
+    0 16px 20px oklch(0 0 0 / 0.05);
+  --shadow-2xl:
+    0 0 0 1px oklch(0 0 0 / 0.05), 0 16px 24px oklch(0 0 0 / 0.12),
+    0 24px 32px oklch(0 0 0 / 0.06);
+
+  /*
+	 * Motion scale — single source of truth for CSS-driven animation. Names +
+	 * values follow the transitions.dev token scale; usage comments follow Emil
+	 * Kowalski's easing blueprint (ease-out enter/exit, ease-in-out on-screen
+	 * movement, ease-out hover, linear constant-speed). `lib/animation.ts` mirrors
+	 * THESE values for the Motion/react layer, so the JS and CSS layers agree.
+	 *
+	 * Tailwind usage:
+	 *   easings  → first-class utilities from the `--ease-*` namespace: `ease-smooth-out`.
+	 *   durations→ NO `--duration-*` utility namespace exists in TW v4, so reference
+	 *              them with the custom-property shorthand: `duration-(--duration-quick)`.
+	 * Both are also emitted as `:root` CSS vars for raw-CSS / keyframe use
+	 * (`var(--duration-slow)`). (--ease-out / --ease-in-out intentionally override
+	 * Tailwind's cubic-bezier defaults with the CSS keywords.)
+	 */
+  --duration-stagger: 40ms; /* per-item stagger offset */
+  --duration-micro: 80ms; /* tooltip/path delay, shake segment, large stagger */
+  --duration-quick: 150ms; /* modal/dropdown close, text swap, tooltip appear */
+  --duration-fast: 250ms; /* icon swap, dropdown/modal open, tabs sliding, page slide */
+  --duration-medium: 350ms; /* panel close, toast close */
+  --duration-slow: 400ms; /* panel open, skeleton reveal, input clear */
+  --duration-very-slow: 500ms; /* emphasis moments, badge appear, text reveal, success check */
+
+  /* Spinner cell loop per matrix density. Off the ladder above by design:
+	   that scale times a transition someone waits through; these set the
+	   period of an ambient loop nobody watches to completion. */
+  --duration-spinner-3: 1425ms;
+  --duration-spinner-5: 1950ms;
+  --duration-spinner-7: 2550ms;
+
+  --ease-smooth-out: cubic-bezier(
+    0.22,
+    1,
+    0.36,
+    1
+  ); /* enter/exit, page slide, resize, position change */
+  --ease-in-out: ease-in-out; /* icon swap, text swap, text reveal, skeleton reveal */
+  --ease-in-out-strong: cubic-bezier(
+    0.65,
+    0,
+    0.35,
+    1
+  ); /* stronger on-screen movement — sliding tab indicator (SERP Lens addition) */
+  --ease-out: ease-out; /* tooltip open / close, gentle hover */
+  --ease-linear: linear; /* shimmer, skeleton pulse */
+  --ease-bounce: cubic-bezier(0.34, 1.36, 0.64, 1); /* badge pop open */
+  --ease-bounce-strong: cubic-bezier(
+    0.34,
+    3.85,
+    0.64,
+    1
+  ); /* bouncy hover-out (avatar return) */
+}
+
+:root {
+  /*
+	 * Motion durations + easings live in the `@theme` block (top of file): easings
+	 * become `ease-*` utilities, durations are referenced via `duration-(--duration-*)`
+	 * — see the note there. The distance/scale/blur tokens below stay here as plain
+	 * CSS vars, referenced as arbitrary values (`[var(--distance-base)]`).
+	 */
+  --distance-micro: 4px; /* text swap */
+  --distance-small: 6px; /* error shake (small segment) */
+  --distance-base: 8px; /* badge diagonal reveal, page slide, error shake (large segment) */
+  --distance-medium: 12px; /* text reveal */
+  --distance-large: 30px; /* check badge appear */
+
+  --scale-large: 0.96; /* modal open / close */
+  --scale-medium: 0.97; /* dropdown open */
+  --scale-small: 0.98; /* tooltip open */
+  --scale-tiny: 0.99; /* dropdown close */
+
+  --blur-small: 2px; /* panel reveal, icon swap, text swap, skeleton reveal, number pop-in */
+  --blur-medium: 3px; /* page slide, text reveal */
+  --blur-large: 8px; /* success check open */
+
+  --accent: oklch(0.962 0.003 308.4);
+  --accent-foreground: oklch(0.145 0 0);
+  --background: oklch(0.97 0.001 106.4);
+  --panel: oklch(0.997 0 0);
+  --background-alt: oklch(0.991 0 0);
+  --background-light: oklch(0.9669 0.001 282.7);
+  --background-vibrant: oklch(1 0 0 / 0.55);
+  --light: oklch(1 0 0);
+  --glass: oklch(0.991 0 0 / 0.4);
+  --glass-light: oklch(1 0 0 / 0.6);
+  --glass-dark: oklch(0.797 0.008 286);
+  --shadow-xs-color: oklch(0 0 0 / 0.05);
+  --shadow-xs-offset-x: 0;
+  --shadow-xs-offset-y: 1px;
+  --shadow-xs-blur-radius: 2px;
+  --shadow-sm-1-offset-x: 0;
+  --shadow-sm-1-offset-y: 1px;
+  --shadow-sm-1-blur-radius: 3px;
+  --shadow-sm-1-spread-radius: 0;
+  --shadow-sm-1-color: oklch(0 0 0 / 0.1);
+  --shadow-sm-2-offset-x: 0;
+  --shadow-sm-2-offset-y: 1px;
+  --shadow-sm-2-blur-radius: 2px;
+  --shadow-sm-2-spread-radius: -1px;
+  --shadow-sm-2-color: oklch(0 0 0 / 0.1);
+  --shadow-md-1-offset-x: 0;
+  --shadow-md-1-offset-y: 4px;
+  --shadow-md-1-blur-radius: 6px;
+  --shadow-md-1-spread-radius: -1px;
+  --shadow-md-1-color: oklch(0 0 0 / 0.1);
+  --shadow-md-2-offset-x: 0;
+  --shadow-md-2-offset-y: 2px;
+  --shadow-md-2-blur-radius: 4px;
+  --shadow-md-2-spread-radius: -2px;
+  --shadow-md-2-color: oklch(0 0 0 / 0.1);
+  /* The single hairline every `shadow-ring-*` token draws instead of a border.
+	   Low-alpha on purpose: it composites against whatever sits behind the surface
+	   rather than painting an opaque stroke over the surface's own fill, so the edge
+	   reads against the backdrop it actually sits on. Inverted to white under
+	   `.dark`, where a black hairline would disappear. */
+  --ring-hairline: oklch(0 0 0 / 0.06);
+  --shadow-xl-1-offset-x: 0;
+  --shadow-xl-1-offset-y: 20px;
+  --shadow-xl-1-blur-radius: 25px;
+  --shadow-xl-1-spread-radius: -5px;
+  --shadow-xl-1-color: oklch(0 0 0 / 0.1);
+  --shadow-xl-2-offset-x: 0;
+  --shadow-xl-2-offset-y: 8px;
+  --shadow-xl-2-blur-radius: 10px;
+  --shadow-xl-2-spread-radius: -6px;
+  --shadow-xl-2-color: oklch(0 0 0 / 0.1);
+  --border: oklch(0.923 0.003 48.7);
+  --border-soft: oklch(0.953 0.003 48.7);
+  --card: oklch(1 0 0);
+  --card-muted: oklch(0.985 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --chart-1: oklch(0.646 0.194 41.1);
+  --chart-2: oklch(0.6 0.104 184.7);
+  --chart-3: oklch(0.398 0.066 227.4);
+  --chart-4: oklch(0.837 0.164 84.4);
+  --chart-5: oklch(0.769 0.165 70.1);
+  --foreground: oklch(0.145 0 0);
+  --input: oklch(0.953 0.003 48.7);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.439 0 0);
+  --muted-foreground-icon: oklch(0.556 0 0);
+  --muted-foreground-subtle: oklch(0.715 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --default-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: oklch(0.981 0.003 128.5);
+  --brand: oklch(0.323 0.04 164);
+  --ring: oklch(0.87 0 0);
+  --ring-offset: oklch(0.97 0.001 106.4);
+  --track: oklch(0.958 0.001 106.4);
+  --default: oklch(0.205 0 0);
+  --secondary: oklch(0.985 0 0);
+  --secondary-foreground: oklch(0.145 0 0);
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-background: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.439 0 0);
+  --sidebar-primary: oklch(0.145 0 0);
+  --sidebar-primary-foreground: oklch(0.981 0.003 128.5);
+  --sidebar-accent: oklch(0 0 0 / 0.06);
+  --sidebar-accent-foreground: oklch(0.145 0 0);
+  --sidebar-border: oklch(0.923 0.003 48.7);
+  --sidebar-ring: oklch(0.87 0 0);
+  --success: oklch(0.627 0.17 149.2);
+  --warning: oklch(0.769 0.165 70.1);
+  --warning-secondary: oklch(0.795 0.162 86);
+  --destructive: oklch(0.506 0.19 28.1);
+  --success-bg: oklch(0.962 0.043 156.7);
+  --success-border: oklch(0.9505 0.0507 163.05);
+  --success-foreground: oklch(0.448 0.108 151.2);
+  --warning-bg: oklch(0.962 0.058 95.6);
+  --warning-foreground: oklch(0.473 0.125 46.2);
+  --destructive-bg: oklch(0.936 0.031 17.7);
+  --destructive-foreground: oklch(0.5059 0.1901 28.1);
+  --destructive-foreground-tint: oklch(0.506 0.19 28.1);
+  --control: oklch(1 0 0);
+  --field-control: var(--control);
+  --omnibar: oklch(1 0 0);
+  --score-caution: oklch(0.745 0.146 85.4);
+  --info: oklch(0.601 0.185 261.8);
+  --info-foreground: oklch(0.431 0.157 263.2);
+  --accent-overlay: oklch(0 0 0 / 0.04);
+  --muted-overlay: oklch(0 0 0 / 0.06);
+  --border-overlay: oklch(0 0 0 / 0.03);
+  --agent-1: oklch(0.56 0.181 263.9);
+  --agent-1-bg: oklch(0.961 0.009 264.5);
+  --agent-1-border: oklch(0.871 0.034 263.6);
+  --agent-2: oklch(0.559 0.073 190.4);
+  --agent-2-bg: oklch(0.96 0.026 190.9);
+  --agent-2-border: oklch(0.869 0.083 190);
+  --agent-3: oklch(0.561 0.202 320.1);
+  --agent-3-bg: oklch(0.96 0.014 318.7);
+  --agent-3-border: oklch(0.87 0.056 319.5);
+  --agent-4: oklch(0.559 0.091 70.1);
+  --agent-4-bg: oklch(0.959 0.013 63.9);
+  --agent-4-border: oklch(0.871 0.055 70.6);
+  --agent-5: oklch(0.56 0.168 11.9);
+  --agent-5-bg: oklch(0.959 0.01 9.5);
+  --agent-5-border: oklch(0.87 0.04 12.1);
+  --alpha-50: oklch(1 0 0 / 0.5);
+  --custom-background-dark-input-30: oklch(0.97 0.001 106.4);
+  --custom-transparent-dark-input-30: oklch(1 0 0 / 0);
+  --custom-transparent: oklch(1 0 0 / 0);
+  --custom-background-dark-calendar-30: oklch(0.97 0.001 106.4);
+  --custom-accent-dark-input-50: oklch(0.962 0.003 308.4);
+  --custom-accent-dark-calendar-50: oklch(0.962 0.003 308.4);
+  --custom-input-dark-input-80: oklch(0.953 0.003 48.7);
+  --custom-input-dark-input-30: oklch(0.953 0.003 48.7);
+  --custom-input-50-dark-input-80: oklch(0.922 0 0 / 0.5);
+  --custom-input-30-dark-transparent: oklch(0.922 0 0 / 0.3);
+  --custom-input-30-dark-input-30: oklch(0.922 0 0 / 0.3);
+  --custom-muted-dark-input-50: oklch(0.97 0 0);
+  --custom-destructive-dark-destructive-60: oklch(0.506 0.19 28.1);
+  --custom-destructive-dark-destructive-70: oklch(0.506 0.19 28.1);
+  --custom-destructive-dark-destructive-90: oklch(0.506 0.19 28.1);
+  --custom-destructive-10-dark-destructive-20: oklch(0.577 0.215 27.3 / 0.1);
+  --custom-destructive-20-dark-destructive-40: oklch(0.577 0.215 27.3 / 0.2);
+  --custom-destructive-20-dark-destructive-30: oklch(0.577 0.215 27.3 / 0.2);
+  --custom-destructive-40-dark-destructive-60: oklch(0.577 0.215 27.3 / 0.4);
+  --custom-destructive-40-dark-destructive-40: oklch(0.577 0.215 27.3 / 0.4);
+  --custom-amber-900-dark-amber-50: oklch(0.414 0.105 45.9);
+  --custom-amber-50-dark-amber-950: oklch(0.987 0.021 95.3);
+  --custom-amber-200-dark-amber-900: oklch(0.924 0.115 95.7);
+  --custom-neutral-800-dark-neutral-300: oklch(0.269 0 0);
+  --custom-dark-input: oklch(1 0 0 / 0);
+  --custom-outline: oklch(0.715 0 0 / 0.5);
+  --custom-outline-10-dark-outline-20: oklch(0.715 0 0 / 0.1);
+  --custom-blue-500-dark-blue-600: oklch(0.623 0.188 259.8);
+  --custom-border-dark-input-dark: oklch(0.923 0.003 48.7);
+  --custom-ring-dark-input-dark: oklch(0.87 0 0);
+  --custom-ring-dark-input-dark-2: oklch(0.87 0 0);
+  --custom-popover-70: oklch(1 0 0 / 0.7);
+  --custom-foreground-10: oklch(0.145 0 0 / 0.1);
+  --custom-ring-dark-input-dark-3: oklch(0.87 0 0);
+  --custom-bg-background-20-dark-bg-background-10: oklch(1 0 0 / 0.2);
+  --custom-bg-primary-5-dark-bg-primary-10: oklch(0.205 0 0 / 0.05);
+  --custom-alpha-30-dark-alpha-20: oklch(1 0 0 / 0.7);
+}
+
+.dark {
+  --background: oklch(0.168 0 0);
+  --background-alt: oklch(0.1884 0.0033 272);
+  --background-light: oklch(0.967 0.001 272.7);
+  --background-vibrant: oklch(0.193 0 0 / 0.55);
+  --light: oklch(0.2333 0.007 271.2);
+  --panel: oklch(0.196 0 0);
+  --card-muted: oklch(0.187 0 0);
+  --border-soft: oklch(0.281 0 0);
+  --track: oklch(0.168 0 0);
+  --card: oklch(0.205 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.216 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --accent: oklch(0.26 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.205 0 0);
+  --muted-foreground: oklch(0.715 0 0);
+  --muted-foreground-icon: oklch(0.715 0 0);
+  --muted-foreground-subtle: oklch(0.556 0 0);
+  --secondary: oklch(0.205 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --border: oklch(0.285 0 0);
+  --input: oklch(0.309 0 0);
+  --foreground: oklch(0.985 0 0);
+  --ring: oklch(0.556 0 0);
+  --ring-offset: oklch(0.168 0 0);
+  --default: oklch(0.967 0.001 272.7);
+  --default-foreground: oklch(0.21 0.006 271.3);
+  --sidebar: oklch(0.196 0 0);
+  --sidebar-background: oklch(0.196 0 0);
+  --sidebar-foreground: oklch(0.87 0 0);
+  --sidebar-accent: oklch(1 0 0 / 0.054);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(1 0 0 / 0.1);
+  --sidebar-ring: oklch(0.439 0 0);
+  --primary: oklch(0.922 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --sidebar-primary: oklch(0.488 0.217 264.4);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.711 0.166 22.2);
+  --destructive-foreground: oklch(0.7106 0.1661 22.22);
+  --destructive-bg: oklch(0.258 0.089 26);
+  --destructive-foreground-tint: oklch(0.711 0.166 22.2);
+  --success: oklch(0.723 0.192 149.6);
+  --success-bg: oklch(0.266 0.063 152.9);
+  --success-foreground: oklch(0.8 0.182 151.7);
+  --success-border: oklch(0.9049 0.0895 164.15);
+  --warning: oklch(0.837 0.164 84.4);
+  --warning-foreground: oklch(0.837 0.164 84.4);
+  --warning-bg: oklch(0.279 0.074 45.6);
+  --warning-secondary: oklch(0.795 0.162 86);
+  --control: oklch(0.285 0 0);
+  --field-control: color-mix(in oklch, var(--input) 30%, transparent);
+  /* Black hairlines vanish on a dark surface, so the ring inverts to light. */
+  --ring-hairline: oklch(1 0 0 / 0.1);
+  --omnibar: oklch(0.196 0 0);
+  --brand: oklch(0.323 0.04 164);
+  --score-caution: oklch(0.745 0.146 85.4);
+  --info: oklch(0.714 0.143 254.6);
+  --info-foreground: oklch(0.78 0.12 255);
+  --chart-1: oklch(0.488 0.217 264.4);
+  --chart-2: oklch(0.696 0.149 162.5);
+  --chart-3: oklch(0.769 0.165 70.1);
+  --chart-4: oklch(0.627 0.233 303.9);
+  --chart-5: oklch(0.645 0.215 16.4);
+  --glass: oklch(0 0 0 / 0.45);
+  --glass-light: oklch(0.233 0.007 271.2 / 0.6);
+  --glass-dark: oklch(0.362 0.01 285.8);
+  --accent-overlay: oklch(1 0 0 / 0.092);
+  --muted-overlay: oklch(1 0 0 / 0.054);
+  --border-overlay: oklch(1 0 0 / 0.05);
+  --agent-1: oklch(0.723 0.143 267);
+  --agent-1-bg: oklch(0.246 0.038 266.2);
+  --agent-1-border: oklch(0.353 0.068 265.4);
+  --agent-2: oklch(0.767 0.101 188.8);
+  --agent-2-bg: oklch(0.256 0.025 187.2);
+  --agent-2-border: oklch(0.383 0.045 186.8);
+  --agent-3: oklch(0.746 0.158 320);
+  --agent-3-bg: oklch(0.245 0.037 314.1);
+  --agent-3-border: oklch(0.368 0.078 317.6);
+  --agent-4: oklch(0.75 0.107 74.9);
+  --agent-4-bg: oklch(0.256 0.026 71.3);
+  --agent-4-border: oklch(0.402 0.055 71.3);
+  --agent-5: oklch(0.707 0.141 8.5);
+  --agent-5-bg: oklch(0.247 0.03 1.4);
+  --agent-5-border: oklch(0.369 0.065 6.2);
+  --alpha-50: oklch(0.145 0 0 / 0.5);
+  --custom-background-dark-input-30: oklch(1 0 0 / 0.045);
+  --custom-transparent-dark-input-30: oklch(1 0 0 / 0.045);
+  --custom-transparent: oklch(1 0 0 / 0);
+  --custom-background-dark-calendar-30: oklch(1 0 0 / 0.045);
+  --custom-accent-dark-input-50: oklch(1 0 0 / 0.075);
+  --custom-accent-dark-calendar-50: oklch(1 0 0 / 0.075);
+  --custom-input-dark-input-80: oklch(1 0 0 / 0.12);
+  --custom-input-dark-input-30: oklch(1 0 0 / 0.15);
+  --custom-input-50-dark-input-80: oklch(1 0 0 / 0.15);
+  --custom-input-30-dark-transparent: oklch(1 0 0 / 0.005);
+  --custom-input-30-dark-input-30: oklch(1 0 0 / 0.15);
+  --custom-muted-dark-input-50: oklch(1 0 0 / 0.075);
+  --custom-destructive-dark-destructive-60: oklch(0.711 0.166 22.2 / 0.6);
+  --custom-destructive-dark-destructive-70: oklch(0.711 0.166 22.2 / 0.7);
+  --custom-destructive-dark-destructive-90: oklch(0.711 0.166 22.2 / 0.9);
+  --custom-destructive-10-dark-destructive-20: oklch(0.711 0.166 22.2 / 0.2);
+  --custom-destructive-20-dark-destructive-40: oklch(0.711 0.166 22.2 / 0.4);
+  --custom-destructive-20-dark-destructive-30: oklch(0.711 0.166 22.2 / 0.3);
+  --custom-destructive-40-dark-destructive-60: oklch(0.711 0.166 22.2 / 0.6);
+  --custom-destructive-40-dark-destructive-40: oklch(0.711 0.166 22.2 / 0.4);
+  --custom-amber-900-dark-amber-50: oklch(0.987 0.021 95.3);
+  --custom-amber-50-dark-amber-950: oklch(0.279 0.074 45.6);
+  --custom-amber-200-dark-amber-900: oklch(0.414 0.105 45.9);
+  --custom-neutral-800-dark-neutral-300: oklch(0.87 0 0);
+  --custom-dark-input: oklch(0.309 0 0);
+  --custom-outline: oklch(0.556 0 0 / 0.5);
+  --custom-outline-10-dark-outline-20: oklch(0.556 0 0 / 0.2);
+  --custom-blue-500-dark-blue-600: oklch(0.546 0.215 262.9);
+  --custom-border-dark-input-dark: oklch(0.309 0 0);
+  --custom-ring-dark-input-dark: oklch(0.309 0 0);
+  --custom-ring-dark-input-dark-2: oklch(0.309 0 0);
+  --custom-popover-70: oklch(0.269 0 0 / 0.7);
+  --custom-foreground-10: oklch(0.985 0 0 / 0.1);
+  --custom-ring-dark-input-dark-3: oklch(0.309 0 0);
+  --custom-bg-background-20-dark-bg-background-10: oklch(0.145 0 0 / 0.1);
+  --custom-bg-primary-5-dark-bg-primary-10: oklch(1 0 0 / 0.1);
+  --custom-alpha-30-dark-alpha-20: oklch(0.145 0 0 / 0.8);
+}
+
+/*
+ * Figma shadow/xl — filter drop-shadow can't use spread, so each layer is a
+ * separate drop-shadow() (Tailwind's --drop-shadow-* comma syntax wraps both
+ * layers in one invalid drop-shadow() call).
+ */
+@utility drop-shadow-xl {
+  filter: drop-shadow(
+      var(--shadow-xl-1-offset-x) var(--shadow-xl-1-offset-y)
+        var(--shadow-xl-1-blur-radius) var(--shadow-xl-1-color)
+    )
+    drop-shadow(
+      var(--shadow-xl-2-offset-x) var(--shadow-xl-2-offset-y)
+        var(--shadow-xl-2-blur-radius) var(--shadow-xl-2-color)
+    );
+}
+
+/*
+ * Spinner cell breath. The lit window narrows as the matrix gets denser so
+ * the number of cells up at once stays roughly constant — see design.md.
+ * The 2×2 shares the 3×3 curve and period.
+ */
+@keyframes spinner-breathe-3 {
+  0%,
+  100% {
+    opacity: 0.06;
+  }
+  40% {
+    opacity: 0.9;
+  }
+  70% {
+    opacity: 0.19;
+  }
+}
+
+@keyframes spinner-breathe-5 {
+  0% {
+    opacity: 0.06;
+  }
+  17% {
+    opacity: 0.9;
+  }
+  30% {
+    opacity: 0.19;
+  }
+  42%,
+  100% {
+    opacity: 0.06;
+  }
+}
+
+@keyframes spinner-breathe-7 {
+  0% {
+    opacity: 0.06;
+  }
+  10% {
+    opacity: 0.9;
+  }
+  18% {
+    opacity: 0.19;
+  }
+  26%,
+  100% {
+    opacity: 0.06;
+  }
+}
+
+.spinner-cell {
+  animation-duration: var(--spinner-duration);
+  animation-delay: calc(var(--spinner-phase) * var(--spinner-duration));
+  animation-timing-function: var(--ease-in-out);
+  animation-iteration-count: infinite;
+}
+
+.spinner-cell-2,
+.spinner-cell-3 {
+  --spinner-duration: var(--duration-spinner-3);
+  animation-name: spinner-breathe-3;
+}
+
+.spinner-cell-5 {
+  --spinner-duration: var(--duration-spinner-5);
+  animation-name: spinner-breathe-5;
+}
+
+.spinner-cell-7 {
+  --spinner-duration: var(--duration-spinner-7);
+  animation-name: spinner-breathe-7;
+}
+
+/* apps/web ships no global reduced-motion rule; the rest pose each cell sets
+   inline is what this exposes. */
+@media (prefers-reduced-motion: reduce) {
+  .spinner-cell {
+    animation: none !important;
+  }
+}

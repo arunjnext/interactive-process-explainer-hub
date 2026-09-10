@@ -59,6 +59,7 @@ try {
 const component = `import { useState } from 'react'
 
 import { LessonSection } from '../../components/LessonSection'
+import { Button } from '../../components/ui/button'
 import styles from './${componentName}.module.css'
 
 export default function ${componentName}() {
@@ -75,9 +76,9 @@ export default function ${componentName}() {
       <LessonSection id="dry-run" section="dry-run" eyebrow="03 · Interactive dry run" title="Run representative data" description="Expose each meaningful state transition.">
         <p>This teaching control is a simulation; replace it with representative, source-backed state.</p>
         <div className={styles.controls}>
-          <button type="button" onClick={() => setStep((value) => Math.max(0, value - 1))}>Previous</button>
-          <button type="button" onClick={() => setStep((value) => value + 1)}>Next</button>
-          <button type="button" onClick={() => setStep(0)}>Reset</button>
+          <Button variant="outline" type="button" onClick={() => setStep((value) => Math.max(0, value - 1))}>Previous</Button>
+          <Button type="button" onClick={() => setStep((value) => value + 1)}>Next</Button>
+          <Button variant="ghost" type="button" onClick={() => setStep(0)}>Reset</Button>
         </div>
         <p aria-live="polite">Active teaching step: {step}</p>
       </LessonSection>

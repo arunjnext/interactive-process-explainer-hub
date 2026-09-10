@@ -3,11 +3,9 @@
   margin: 0;
   overflow: hidden;
   border: 1px solid var(--border-strong);
-  border-radius: 1.35rem;
+  border-radius: var(--radius-xl);
   padding: clamp(1rem, 2.5vw, 1.5rem);
-  background:
-    linear-gradient(150deg, rgba(109, 255, 211, 0.055), transparent 42%),
-    var(--surface);
+  background: var(--panel);
   box-shadow: var(--shadow);
 }
 
@@ -27,7 +25,7 @@
 
 .kicker {
   margin-bottom: 0.42rem;
-  color: var(--accent);
+  color: var(--agent-2);
   font-family: "DM Mono", ui-monospace, monospace;
   font-size: 0.65rem;
   letter-spacing: 0.1em;
@@ -49,7 +47,7 @@
 .description {
   max-width: 48rem;
   margin: 0.8rem 0 1rem;
-  color: var(--muted);
+  color: var(--muted-foreground);
   font-size: 0.9rem;
 }
 
@@ -59,14 +57,14 @@
   min-height: 27rem;
   overflow: hidden;
   border: 1px solid var(--border);
-  border-radius: 1rem;
+  border-radius: var(--radius-lg);
   background:
     radial-gradient(
       circle at center,
-      rgba(114, 247, 207, 0.08),
+      color-mix(in oklch, var(--agent-2) 8%, transparent),
       transparent 55%
     ),
-    #04080d;
+    var(--background);
 }
 
 .viewport canvas {
@@ -79,7 +77,7 @@
   display: grid;
   min-height: 27rem;
   place-items: center;
-  color: var(--muted);
+  color: var(--muted-foreground);
 }
 
 .frame figcaption {

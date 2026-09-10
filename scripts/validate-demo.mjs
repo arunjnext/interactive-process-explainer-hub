@@ -54,7 +54,8 @@ for (const slug of slugs) {
       failures.push(`${slug}: missing ${section} teaching section`);
     }
   }
-  if ((source.match(/<button/g) ?? []).length < 2) {
+  const controlCount = (source.match(/<(?:button|Button)\b/g) ?? []).length;
+  if (controlCount < 2) {
     failures.push(`${slug}: needs at least two interactive controls`);
   }
   if (!source.includes("aria-live")) {

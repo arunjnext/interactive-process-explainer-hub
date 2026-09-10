@@ -28,6 +28,19 @@ test("gallery filters, theme persists, and demo navigation works", async ({
   await expect(page.locator("html")).toHaveAttribute("data-theme", "light");
 });
 
+test("renderer filter uses the shared shadcn select", async ({ page }) => {
+  await page.goto("/");
+  await page.getByRole("combobox", { name: "Renderer" }).click();
+  await page.getByRole("option", { name: "DOM / SVG" }).click();
+  await expect(page.getByText("No matching signals")).toBeVisible();
+  await page.getByRole("button", { name: "Reset filters" }).click();
+  await expect(
+    page.getByRole("link", {
+      name: "Open How an interactive explainer is built",
+    }),
+  ).toBeVisible();
+});
+
 test("dry run supports keyboard interaction and reset", async ({ page }) => {
   await page.goto("/demos/how-explainers-work");
   const next = page.getByRole("button", { name: "Next step" });

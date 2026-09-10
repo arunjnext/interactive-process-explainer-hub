@@ -8,14 +8,14 @@
 .backLink {
   width: fit-content;
   margin-bottom: 1.5rem;
-  color: var(--muted);
+  color: var(--muted-foreground);
   font-size: 0.8rem;
   font-weight: 700;
   text-decoration: none;
 }
 
 .backLink:hover {
-  color: var(--accent);
+  color: var(--agent-2);
 }
 
 .metaRow {
@@ -38,7 +38,7 @@
 .demoHeader > p {
   max-width: 48rem;
   margin: 0.5rem 0 0;
-  color: var(--muted);
+  color: var(--muted-foreground);
   font-size: clamp(1rem, 2vw, 1.2rem);
 }
 
@@ -54,7 +54,7 @@
   border: 1px solid var(--border);
   border-radius: 999px;
   padding: 0.5rem 0.75rem;
-  color: var(--muted);
+  color: var(--muted-foreground);
   background: var(--surface);
   font-size: 0.72rem;
   font-weight: 700;
@@ -70,7 +70,7 @@
   display: grid;
   min-height: 26rem;
   place-items: center;
-  color: var(--muted);
+  color: var(--muted-foreground);
 }
 
 .missing {
@@ -91,5 +91,5 @@
 .missing > p:not(:first-child) {
   max-width: 38rem;
   margin-bottom: 1.5rem;
-  color: var(--muted);
+  color: var(--muted-foreground);
 }
