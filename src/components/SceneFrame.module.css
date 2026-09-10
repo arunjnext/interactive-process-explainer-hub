@@ -1,0 +1,101 @@
+.frame {
+  min-width: 0;
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid var(--border-strong);
+  border-radius: 1.35rem;
+  padding: clamp(1rem, 2.5vw, 1.5rem);
+  background:
+    linear-gradient(150deg, rgba(109, 255, 211, 0.055), transparent 42%),
+    var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.heading {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  min-width: 0;
+  gap: 1rem;
+}
+
+.heading h2 {
+  margin: 0;
+  font-size: clamp(1.4rem, 3vw, 2.2rem);
+  letter-spacing: -0.04em;
+}
+
+.kicker {
+  margin-bottom: 0.42rem;
+  color: var(--accent);
+  font-family: "DM Mono", ui-monospace, monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.liveBadge {
+  flex: 0 0 auto;
+  border: 1px solid color-mix(in srgb, var(--amber) 45%, transparent);
+  border-radius: 999px;
+  padding: 0.35rem 0.58rem;
+  color: var(--amber);
+  font-family: "DM Mono", ui-monospace, monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.description {
+  max-width: 48rem;
+  margin: 0.8rem 0 1rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.viewport {
+  position: relative;
+  min-width: 0;
+  min-height: 27rem;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(114, 247, 207, 0.08),
+      transparent 55%
+    ),
+    #04080d;
+}
+
+.viewport canvas {
+  display: block;
+  width: 100% !important;
+  height: 27rem !important;
+}
+
+.loading {
+  display: grid;
+  min-height: 27rem;
+  place-items: center;
+  color: var(--muted);
+}
+
+.frame figcaption {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+@media (max-width: 600px) {
+  .viewport,
+  .viewport canvas,
+  .loading {
+    min-height: 21rem;
+    height: 21rem !important;
+  }
+}

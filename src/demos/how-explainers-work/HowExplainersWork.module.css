@@ -1,0 +1,456 @@
+.lessonStack {
+  display: grid;
+  min-width: 0;
+  padding-bottom: clamp(4rem, 8vw, 7rem);
+  gap: 1rem;
+}
+
+.analogyGrid,
+.codeMap,
+.safetyGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  min-width: 0;
+  gap: 0.75rem;
+}
+
+.analogyGrid article,
+.codeMap article,
+.safetyGrid article {
+  min-width: 0;
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  padding: 1.15rem;
+  background: var(--surface-muted);
+}
+
+.analogyGrid article > span:first-child {
+  display: grid;
+  width: 2.5rem;
+  aspect-ratio: 1;
+  margin-bottom: 1rem;
+  place-items: center;
+  border: 1px solid color-mix(in srgb, var(--accent) 35%, transparent);
+  border-radius: 50%;
+  color: var(--accent);
+  background: var(--accent-soft);
+  font-size: 1.2rem;
+}
+
+.analogyGrid h3,
+.codeMap h3,
+.safetyGrid h3 {
+  margin-bottom: 0.5rem;
+}
+
+.analogyGrid p,
+.codeMap p,
+.safetyGrid p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.86rem;
+}
+
+.mappingTable {
+  min-width: 0;
+  margin-top: 1rem;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+}
+
+.mappingTable > div {
+  display: grid;
+  grid-template-columns: minmax(0, 0.7fr) minmax(0, 1.3fr);
+  min-width: 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.mappingTable > div:last-child {
+  border-bottom: 0;
+}
+
+.mappingTable span,
+.mappingTable strong {
+  min-width: 0;
+  padding: 0.8rem 1rem;
+  overflow-wrap: anywhere;
+}
+
+.mappingTable span:first-child,
+.mappingTable strong:first-child {
+  border-right: 1px solid var(--border);
+  color: var(--accent);
+}
+
+.mappingTable strong {
+  background: var(--surface-muted);
+  font-size: 0.75rem;
+}
+
+.mappingTable span {
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+.pipeline {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  min-width: 0;
+  margin: 0 0 1rem;
+  padding: 0;
+  gap: 0.4rem;
+  list-style: none;
+}
+
+.pipeline li {
+  min-width: 0;
+}
+
+.pipeline button {
+  display: grid;
+  width: 100%;
+  min-width: 0;
+  min-height: 9.2rem;
+  align-content: start;
+  border: 1px solid var(--border);
+  border-radius: 0.8rem;
+  padding: 0.8rem;
+  gap: 0.5rem;
+  color: var(--muted);
+  background: var(--surface-muted);
+  text-align: left;
+}
+
+.pipeline button[aria-pressed="true"] {
+  border-color: var(--accent);
+  color: var(--text);
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent) 18%, transparent);
+}
+
+.pipeline button > span {
+  color: var(--accent);
+  font-family: "DM Mono", ui-monospace, monospace;
+  font-size: 0.65rem;
+}
+
+.pipeline strong {
+  overflow-wrap: anywhere;
+  font-size: 0.76rem;
+  line-height: 1.35;
+}
+
+.pipeline small {
+  overflow-wrap: anywhere;
+  color: var(--quiet);
+  font-size: 0.64rem;
+  line-height: 1.45;
+}
+
+.codeMap article {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.codeMap article > span {
+  color: var(--violet);
+  font-family: "DM Mono", ui-monospace, monospace;
+  font-size: 0.63rem;
+  letter-spacing: 0.08em;
+}
+
+.codeMap code {
+  overflow-wrap: anywhere;
+  color: var(--accent);
+  font-size: 0.75rem;
+}
+
+.runner {
+  display: grid;
+  grid-template-columns: minmax(0, 0.7fr) minmax(0, 1.3fr);
+  min-width: 0;
+  gap: 0.75rem;
+}
+
+.controls,
+.tracePanel {
+  min-width: 0;
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  padding: 1rem;
+  background: var(--surface-muted);
+}
+
+.controls {
+  display: grid;
+  align-content: start;
+  gap: 1.1rem;
+}
+
+.controls fieldset {
+  min-width: 0;
+  margin: 0;
+  border: 0;
+  padding: 0;
+}
+
+.controls legend,
+.rangeLabel > span {
+  margin-bottom: 0.5rem;
+  color: var(--muted);
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+
+.segmented {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  min-width: 0;
+  border: 1px solid var(--border);
+  border-radius: 0.7rem;
+  padding: 0.22rem;
+  gap: 0.22rem;
+  background: var(--surface);
+}
+
+.segmented button,
+.buttonRow button {
+  min-width: 0;
+  border: 1px solid transparent;
+  border-radius: 0.55rem;
+  padding: 0.62rem 0.75rem;
+  color: var(--muted);
+  background: transparent;
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.segmented button[aria-pressed="true"] {
+  color: #03140f;
+  background: var(--accent);
+}
+
+.rangeLabel {
+  display: grid;
+  min-width: 0;
+}
+
+.rangeLabel > span {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.rangeLabel output {
+  color: var(--accent);
+  font-family: "DM Mono", ui-monospace, monospace;
+}
+
+.rangeLabel input {
+  width: 100%;
+  accent-color: var(--accent);
+}
+
+.buttonRow {
+  display: flex;
+  min-width: 0;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.buttonRow button {
+  border-color: var(--border);
+  background: var(--surface);
+}
+
+.buttonRow button:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+.buttonRow .primaryButton {
+  border-color: var(--accent);
+  color: #03140f;
+  background: var(--accent);
+}
+
+.tracePanel {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.traceHeader {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  min-width: 0;
+  gap: 0.8rem;
+}
+
+.traceHeader > div {
+  display: grid;
+  min-width: 0;
+  gap: 0.2rem;
+}
+
+.traceHeader span {
+  color: var(--quiet);
+  font-family: "DM Mono", ui-monospace, monospace;
+  font-size: 0.64rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.traceHeader strong {
+  overflow-wrap: anywhere;
+}
+
+.tracePanel pre {
+  min-width: 0;
+  min-height: 13rem;
+  margin: 0;
+  overflow: auto;
+  border: 1px solid var(--border);
+  border-radius: 0.7rem;
+  padding: 1rem;
+  color: #d9ebe6;
+  background: #04080d;
+  font-size: 0.72rem;
+  line-height: 1.75;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.safetyNumber {
+  display: inline-flex;
+  margin-bottom: 1.2rem;
+  color: var(--danger);
+  font-family: "DM Mono", ui-monospace, monospace;
+  font-size: 0.72rem;
+}
+
+.sources {
+  display: grid;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  gap: 0.55rem;
+  list-style: none;
+}
+
+.sources a {
+  display: flex;
+  justify-content: space-between;
+  min-width: 0;
+  border: 1px solid var(--border);
+  border-radius: 0.8rem;
+  padding: 0.85rem 1rem;
+  gap: 1rem;
+  color: var(--muted);
+  background: var(--surface-muted);
+  font-size: 0.82rem;
+  text-decoration: none;
+}
+
+.sources a:hover {
+  border-color: var(--border-strong);
+  color: var(--text);
+}
+
+.sources a span {
+  flex: 0 0 auto;
+  color: var(--accent);
+}
+
+.sceneFallback {
+  display: grid;
+  min-height: 27rem;
+  align-content: center;
+  padding: 1.25rem;
+  gap: 1.3rem;
+  color: var(--muted);
+  background: #04080d;
+}
+
+.sceneFallback > span {
+  color: #8da19c;
+  font-family: "DM Mono", ui-monospace, monospace;
+  font-size: 0.68rem;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.sceneFallback ol {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  gap: 0.4rem;
+  list-style: none;
+}
+
+.sceneFallback li {
+  display: grid;
+  min-width: 0;
+  border: 1px solid #1b302b;
+  border-radius: 0.7rem;
+  padding: 0.7rem 0.4rem;
+  gap: 0.35rem;
+  color: #69817b;
+  font-size: 0.62rem;
+  text-align: center;
+}
+
+.sceneFallback li[data-complete="true"] {
+  color: #8eaaa2;
+  background: rgba(112, 247, 207, 0.04);
+}
+
+.sceneFallback li[data-active="true"] {
+  border-color: #70f7cf;
+  color: #70f7cf;
+  background: rgba(112, 247, 207, 0.1);
+}
+
+.sceneFallback li span {
+  font-family: "DM Mono", ui-monospace, monospace;
+}
+
+@media (max-width: 920px) {
+  .pipeline {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .runner {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  .analogyGrid,
+  .codeMap,
+  .safetyGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .pipeline,
+  .sceneFallback ol {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 420px) {
+  .mappingTable > div {
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  }
+
+  .pipeline {
+    grid-template-columns: 1fr;
+  }
+
+  .pipeline button {
+    min-height: 0;
+  }
+}
