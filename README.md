@@ -2,6 +2,8 @@
 
 A public gallery of truthful, interactive explanations for difficult technical processes. Every demo starts with an accessible mental model, reconnects it to exact implementation details, and finishes with an inspectable dry run.
 
+[Open the live Process Observatory](https://interactive-process-explainer-hub.vercel.app)
+
 ## Technology
 
 - React, TypeScript, and Vite
