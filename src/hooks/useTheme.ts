@@ -2,11 +2,11 @@ import { useEffect, useState } from "react";
 
 export type Theme = "dark" | "light";
 
-const storageKey = "process-observatory-theme";
+const storageKey = "process-observatory-theme-v2";
 
 function readInitialTheme(): Theme {
   const savedTheme = window.localStorage.getItem(storageKey);
-  return savedTheme === "light" ? "light" : "dark";
+  return savedTheme === "dark" ? "dark" : "light";
 }
 
 export function useTheme() {

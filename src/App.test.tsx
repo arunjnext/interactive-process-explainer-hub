@@ -41,11 +41,11 @@ describe("application routes", () => {
     renderAt("/");
 
     await user.click(
-      screen.getByRole("button", { name: "Switch to light theme" }),
+      screen.getByRole("button", { name: "Switch to dark theme" }),
     );
-    expect(document.documentElement).toHaveAttribute("data-theme", "light");
-    expect(window.localStorage.getItem("process-observatory-theme")).toBe(
-      "light",
+    expect(document.documentElement).toHaveAttribute("data-theme", "dark");
+    expect(window.localStorage.getItem("process-observatory-theme-v2")).toBe(
+      "dark",
     );
   });
 

@@ -19,14 +19,14 @@
 
 .heading h2 {
   margin: 0;
-  font-size: clamp(1.4rem, 3vw, 2.2rem);
-  letter-spacing: -0.04em;
+  font-size: var(--text-lg);
+  letter-spacing: normal;
 }
 
 .kicker {
   margin-bottom: 0.42rem;
-  color: var(--agent-2);
-  font-family: "DM Mono", ui-monospace, monospace;
+  color: var(--primary);
+  font-family: var(--font-mono);
   font-size: 0.65rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -34,11 +34,11 @@
 
 .liveBadge {
   flex: 0 0 auto;
-  border: 1px solid color-mix(in srgb, var(--amber) 45%, transparent);
+  border: 1px solid color-mix(in srgb, var(--muted-foreground) 45%, transparent);
   border-radius: 999px;
   padding: 0.35rem 0.58rem;
-  color: var(--amber);
-  font-family: "DM Mono", ui-monospace, monospace;
+  color: var(--muted-foreground);
+  font-family: var(--font-mono);
   font-size: 0.65rem;
   letter-spacing: 0.07em;
   text-transform: uppercase;
@@ -58,13 +58,7 @@
   overflow: hidden;
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
-  background:
-    radial-gradient(
-      circle at center,
-      color-mix(in oklch, var(--agent-2) 8%, transparent),
-      transparent 55%
-    ),
-    var(--background);
+  background: var(--card-muted);
 }
 
 .viewport canvas {

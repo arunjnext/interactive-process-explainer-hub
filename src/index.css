@@ -18,16 +18,15 @@
 
   /* Explainer aliases resolve only to the copied SerpLens semantic tokens. */
   --bg: var(--background);
-  --bg-grid: color-mix(in oklch, var(--border) 36%, transparent);
   --surface: var(--panel);
   --surface-raised: var(--card);
   --surface-muted: var(--card-muted);
   --text: var(--foreground);
-  --quiet: var(--muted-foreground-subtle);
+  --quiet: var(--muted-foreground);
   --border-strong: var(--border);
   --accent-strong: var(--primary);
-  --accent-soft: var(--agent-1-bg);
-  --violet: var(--agent-3);
+  --accent-soft: var(--muted);
+  --violet: var(--muted-foreground);
   --amber: var(--warning);
   --danger: var(--destructive);
   --shadow: var(--shadow-ring-hard-md);
@@ -55,32 +54,11 @@
     min-width: 0;
     min-height: 100vh;
     margin: 0;
+    font-size: var(--text-sm);
+    line-height: var(--text-sm--line-height);
     overflow-x: hidden;
     color: var(--foreground);
     background-color: var(--background);
-    background-image:
-      linear-gradient(var(--bg-grid) 1px, transparent 1px),
-      linear-gradient(90deg, var(--bg-grid) 1px, transparent 1px);
-    background-size: 34px 34px;
-  }
-
-  body::before {
-    position: fixed;
-    z-index: -1;
-    inset: 0;
-    background:
-      radial-gradient(
-        circle at 15% 5%,
-        color-mix(in oklch, var(--agent-2) 8%, transparent),
-        transparent 28rem
-      ),
-      radial-gradient(
-        circle at 90% 30%,
-        color-mix(in oklch, var(--agent-3) 6%, transparent),
-        transparent 25rem
-      );
-    content: "";
-    pointer-events: none;
   }
 
   button,
@@ -108,6 +86,10 @@
     margin-top: 0;
   }
 
+  strong {
+    font-weight: 500;
+  }
+
   h1,
   h2,
   h3 {
@@ -116,7 +98,7 @@
   }
 
   p {
-    line-height: 1.7;
+    line-height: 1.55;
   }
 
   code,

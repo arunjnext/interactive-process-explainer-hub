@@ -44,11 +44,6 @@ export function GalleryPage() {
             run concrete data through every meaningful state change.
           </p>
         </div>
-        <div className={styles.orbit} aria-hidden="true">
-          <span className={styles.orbitCore}>01</span>
-          <span className={styles.orbitRing} />
-          <span className={styles.orbitDot} />
-        </div>
       </section>
 
       <section className={styles.catalogue} aria-labelledby="catalogue-title">
@@ -93,11 +88,8 @@ export function GalleryPage() {
 
         {filteredDemos.length > 0 ? (
           <div className={styles.grid}>
-            {filteredDemos.map((demo, index) => (
+            {filteredDemos.map((demo) => (
               <Card className={styles.card} key={demo.slug}>
-                <div className={styles.cardIndex}>
-                  {String(index + 1).padStart(2, "0")}
-                </div>
                 <div className={styles.cardMeta}>
                   <RendererBadge renderer={demo.renderer} />
                   <span>{demo.updatedAt}</span>

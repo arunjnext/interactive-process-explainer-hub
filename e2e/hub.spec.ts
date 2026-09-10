@@ -9,8 +9,8 @@ test("gallery filters, theme persists, and demo navigation works", async ({
       name: "Difficult processes, made inspectable.",
     }),
   ).toBeVisible();
-  await page.getByRole("button", { name: "Switch to light theme" }).click();
-  await expect(page.locator("html")).toHaveAttribute("data-theme", "light");
+  await page.getByRole("button", { name: "Switch to dark theme" }).click();
+  await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
 
   await page
     .getByRole("textbox", { name: "Search explainers" })
@@ -25,7 +25,7 @@ test("gallery filters, theme persists, and demo navigation works", async ({
     }),
   ).toBeVisible();
   await expect.poll(() => page.evaluate(() => window.scrollY)).toBe(0);
-  await expect(page.locator("html")).toHaveAttribute("data-theme", "light");
+  await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
 });
 
 test("renderer filter uses the shared shadcn select", async ({ page }) => {
