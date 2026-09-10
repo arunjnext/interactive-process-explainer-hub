@@ -8,7 +8,7 @@ A public gallery of truthful, interactive explanations for difficult technical p
 - Three.js through React Three Fiber and Drei
 - CSS modules and shared observatory design tokens
 - Vitest, Testing Library, and Playwright
-- Vercel production and GitHub preview deployments
+- Vercel production and GitHub Actions preview deployments
 
 Three.js is used only when spatial relationships or animated state transitions materially improve the explanation. Prose, source maps, controls, tables, and fallbacks remain semantic DOM.
 
@@ -52,7 +52,9 @@ Simulations must be labeled as simulations. Local filesystem paths must never ap
 
 ## Publishing boundary
 
-Creating a demo saves it locally. Committing, pushing, opening a pull request, and deploying are separate actions and require explicit authorization. Once authorized, pushes to `main` deploy to production and pull requests receive Vercel previews.
+Creating a demo saves it locally. Committing, pushing, opening a pull request, and deploying are separate actions and require explicit authorization. Once authorized, pushes to `main` deploy to production and pull requests from branches in this repository receive Vercel previews. Fork pull requests do not receive deployment credentials.
+
+The deployment workflow uses encrypted repository secrets for the Vercel token, organization ID, and project ID. If the Vercel account later gains a native GitHub login connection, the workflow can be replaced by Vercel's native Git integration.
 
 ## License
 

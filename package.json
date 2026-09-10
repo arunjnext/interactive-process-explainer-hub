@@ -3,6 +3,7 @@
   "private": true,
   "version": "1.0.0",
   "description": "A public gallery of truthful, interactive technical explainers.",
+  "packageManager": "pnpm@11.15.1",
   "type": "module",
   "scripts": {
     "dev": "vite",
