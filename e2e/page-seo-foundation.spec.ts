@@ -102,6 +102,36 @@ test("foundation renders a real Three.js canvas", async ({ page }) => {
   expect(errors).toEqual([]);
 });
 
+test("foundation full view opens as a chrome-free embeddable route", async ({
+  page,
+}) => {
+  await page.goto("/demos/page-seo-foundation");
+  const fullView = page.getByRole("link", {
+    name: "Open walkthrough in full view",
+  });
+  await expect(fullView).toHaveAttribute(
+    "href",
+    "/demos/page-seo-foundation/embed",
+  );
+
+  await page.setViewportSize({ width: 360, height: 800 });
+  await page.goto("/demos/page-seo-foundation/embed");
+  await expect(page.locator("#dry-run")).toBeVisible();
+  await expect(page.locator("body > #root header")).toHaveCount(0);
+  await expect(page.locator("body > #root footer")).toHaveCount(0);
+  await expect(page.locator("#eli5, #technical, #edge-case")).toHaveCount(0);
+  await expect(
+    page.getByRole("link", { name: "Open walkthrough in full view" }),
+  ).toHaveCount(0);
+  expect(
+    await page.evaluate(
+      () =>
+        document.documentElement.scrollWidth -
+        document.documentElement.clientWidth,
+    ),
+  ).toBeLessThanOrEqual(1);
+});
+
 test("foundation remains usable when WebGL is unavailable", async ({
   page,
 }) => {

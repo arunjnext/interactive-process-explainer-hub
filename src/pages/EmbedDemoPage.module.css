@@ -1,0 +1,15 @@
+.embedPage {
+  min-width: 0;
+  min-height: 100dvh;
+}
+
+.loading,
+.missing {
+  display: grid;
+  min-height: 100dvh;
+  margin: 0;
+  place-items: center;
+  padding: 1rem;
+  color: var(--muted-foreground);
+  text-align: center;
+}

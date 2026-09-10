@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { Button } from "../../components/ui/button";
+import { Maximize2 } from "lucide-react";
+import { Button, ButtonLink } from "../../components/ui/button";
 import {
   Select,
   SelectContent,
@@ -29,7 +30,11 @@ const captions = [
   "The verdict returns to this tab’s memory—only if its document is still current.",
 ];
 
-export default function PageSeoFoundation() {
+export default function PageSeoFoundation({
+  embedded = false,
+}: {
+  embedded?: boolean;
+}) {
   const [run, setRun] = useState<{ scenario: Scenario; step: number }>({
     scenario: "header",
     step: 0,
@@ -52,10 +57,12 @@ export default function PageSeoFoundation() {
             : "Header “noindex” means Googlebot must not index. Its source stays attached."
         : captions[run.step];
   return (
-    <div className={styles.explainer}>
-      <section id="eli5" data-section="eli5" className={styles.intro}>
-        Like a case file: collect facts → understand → decide.
-      </section>
+    <div className={`${styles.explainer} ${embedded ? styles.embedded : ""}`}>
+      {!embedded && (
+        <section id="eli5" data-section="eli5" className={styles.intro}>
+          Like a case file: collect facts → understand → decide.
+        </section>
+      )}
       <section
         id="dry-run"
         data-section="dry-run"
@@ -64,25 +71,40 @@ export default function PageSeoFoundation() {
       >
         <div className={styles.toolbar}>
           <span className={styles.quiet}>3D simulation</span>
-          <Select
-            value={run.scenario}
-            onValueChange={(value) =>
-              setRun({ scenario: value as Scenario, step: 0 })
-            }
-          >
-            <SelectTrigger aria-label="Test case">
-              <SelectValue>
-                {scenarios.find((item) => item.id === run.scenario)?.label}
-              </SelectValue>
-            </SelectTrigger>
-            <SelectContent>
-              {scenarios.map((item) => (
-                <SelectItem key={item.id} value={item.id}>
-                  {item.label}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
+          <div className={styles.toolbarActions}>
+            <Select
+              value={run.scenario}
+              onValueChange={(value) =>
+                setRun({ scenario: value as Scenario, step: 0 })
+              }
+            >
+              <SelectTrigger aria-label="Test case">
+                <SelectValue>
+                  {scenarios.find((item) => item.id === run.scenario)?.label}
+                </SelectValue>
+              </SelectTrigger>
+              <SelectContent>
+                {scenarios.map((item) => (
+                  <SelectItem key={item.id} value={item.id}>
+                    {item.label}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+            {!embedded && (
+              <ButtonLink
+                variant="outline"
+                size="sm"
+                href="/demos/page-seo-foundation/embed"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Open walkthrough in full view"
+              >
+                <Maximize2 data-icon="inline-start" aria-hidden="true" />
+                Full view
+              </ButtonLink>
+            )}
+          </div>
         </div>
         <SceneFrame
           compact
@@ -161,66 +183,75 @@ export default function PageSeoFoundation() {
           </Button>
         </div>
       </section>
-      <details
-        id="technical"
-        data-section="technical"
-        className={styles.details}
-      >
-        <summary>Under the hood</summary>
-        <p className={styles.quiet}>
-          Source-backed simulation, not the live engine. Inspected local tree:
-          5c793bfcc + local changes, 10 Sep 2026.
-        </p>
-        <h3>{step.fn}</h3>
-        <p className={styles.path}>{step.file}</p>
-        <p>
-          {step.before} → {step.after}
-        </p>
-        <p>{step.next}</p>
-        <details>
-          <summary>Evidence packet</summary>
-          <pre>{JSON.stringify(exampleEvidence(run.scenario), null, 2)}</pre>
+      {!embedded && (
+        <details
+          id="technical"
+          data-section="technical"
+          className={styles.details}
+        >
+          <summary>Under the hood</summary>
+          <p className={styles.quiet}>
+            Source-backed simulation, not the live engine. Inspected local tree:
+            5c793bfcc + local changes, 10 Sep 2026.
+          </p>
+          <h3>{step.fn}</h3>
+          <p className={styles.path}>{step.file}</p>
+          <p>
+            {step.before} → {step.after}
+          </p>
+          <p>{step.next}</p>
+          <details>
+            <summary>Evidence packet</summary>
+            <pre>{JSON.stringify(exampleEvidence(run.scenario), null, 2)}</pre>
+          </details>
+          <details>
+            <summary>The nine checks</summary>
+            <div className={styles.checks}>
+              {exampleChecks(run.scenario).map((check) => (
+                <div key={check.id}>
+                  <strong>
+                    {check.label} · {check.status}
+                  </strong>
+                  <p>{check.reason}</p>
+                </div>
+              ))}
+            </div>
+          </details>
+          <p>
+            Collector: Electron main. Contracts: audit-contracts. Interpret +
+            assess: core. Capture and result stores are RAM, not disk.
+            Foundation checks do not execute the legacy alert engine or change
+            scores.
+          </p>
         </details>
-        <details>
-          <summary>The nine checks</summary>
-          <div className={styles.checks}>
-            {exampleChecks(run.scenario).map((check) => (
-              <div key={check.id}>
-                <strong>
-                  {check.label} · {check.status}
-                </strong>
-                <p>{check.reason}</p>
-              </div>
-            ))}
-          </div>
+      )}
+      {!embedded && (
+        <details
+          id="edge-case"
+          data-section="edge-case"
+          className={styles.details}
+        >
+          <summary>Try a late page result</summary>
+          <p>
+            Tab navigated to document-2. The old result belongs to document-1.
+          </p>
+          <p aria-live="polite">
+            {late
+              ? "Rejected. Document-2 keeps waiting for its own assessment."
+              : "The previous verdict was cleared. No verdict for document-2 yet."}
+          </p>
+          <Button
+            variant="outline"
+            disabled={late}
+            onClick={() => setLate(true)}
+          >
+            Send old result
+          </Button>{" "}
+          <Button variant="ghost" onClick={() => setLate(false)}>
+            Reset boundary
+          </Button>
         </details>
-        <p>
-          Collector: Electron main. Contracts: audit-contracts. Interpret +
-          assess: core. Capture and result stores are RAM, not disk. Foundation
-          checks do not execute the legacy alert engine or change scores.
-        </p>
-      </details>
-      <details
-        id="edge-case"
-        data-section="edge-case"
-        className={styles.details}
-      >
-        <summary>Try a late page result</summary>
-        <p>
-          Tab navigated to document-2. The old result belongs to document-1.
-        </p>
-        <p aria-live="polite">
-          {late
-            ? "Rejected. Document-2 keeps waiting for its own assessment."
-            : "The previous verdict was cleared. No verdict for document-2 yet."}
-        </p>
-        <Button variant="outline" disabled={late} onClick={() => setLate(true)}>
-          Send old result
-        </Button>{" "}
-        <Button variant="ghost" onClick={() => setLate(false)}>
-          Reset boundary
-        </Button>
-      </details>
+      )}
     </div>
   );
 }

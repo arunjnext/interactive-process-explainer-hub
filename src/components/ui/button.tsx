@@ -1,5 +1,6 @@
 import { Button as ButtonPrimitive } from "@base-ui/react/button";
 import { cva, type VariantProps } from "class-variance-authority";
+import type { AnchorHTMLAttributes } from "react";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
@@ -54,4 +55,20 @@ function Button({
   );
 }
 
-export { Button };
+function ButtonLink({
+  className,
+  variant = "default",
+  size = "default",
+  ...props
+}: AnchorHTMLAttributes<HTMLAnchorElement> &
+  VariantProps<typeof buttonVariants>) {
+  return (
+    <a
+      data-slot="button"
+      className={cn(buttonVariants({ variant, size, className }))}
+      {...props}
+    />
+  );
+}
+
+export { Button, ButtonLink };

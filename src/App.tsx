@@ -3,6 +3,7 @@ import { Route, Routes, useLocation } from "react-router-dom";
 
 import { AppShell } from "./components/AppShell";
 import { DemoPage } from "./pages/DemoPage";
+import { EmbedDemoPage } from "./pages/EmbedDemoPage";
 import { GalleryPage } from "./pages/GalleryPage";
 import { NotFoundPage } from "./pages/NotFoundPage";
 
@@ -17,6 +18,19 @@ function ScrollToTop() {
 }
 
 export function App() {
+  const { pathname } = useLocation();
+
+  if (/^\/demos\/[^/]+\/embed\/?$/.test(pathname)) {
+    return (
+      <>
+        <ScrollToTop />
+        <Routes>
+          <Route path="/demos/:slug/embed" element={<EmbedDemoPage />} />
+        </Routes>
+      </>
+    );
+  }
+
   return (
     <AppShell>
       <ScrollToTop />

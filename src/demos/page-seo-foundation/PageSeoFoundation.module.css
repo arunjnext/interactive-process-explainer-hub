@@ -21,6 +21,14 @@
   gap: 0.5rem;
   padding: 0.75rem;
 }
+.toolbarActions {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
 .quiet {
   color: var(--muted-foreground);
   font-size: 0.75rem;
@@ -155,6 +163,30 @@
 .verdict[data-verdict="unknown"] {
   color: var(--warning-foreground);
 }
+.embedded {
+  min-height: 100dvh;
+  max-width: none;
+}
+.embedded .player {
+  display: flex;
+  min-height: 100dvh;
+  flex-direction: column;
+  border: 0;
+  border-radius: 0;
+}
+.embedded .player > figure {
+  display: flex;
+  min-height: 22rem;
+  flex: 1 1 22rem;
+}
+.embedded .player > figure > div {
+  min-height: 22rem;
+  height: auto !important;
+  flex: 1;
+}
+.embedded .player > figure canvas {
+  height: 100% !important;
+}
 @media (max-width: 600px) {
   .controls {
     gap: 0.25rem;
@@ -179,5 +211,11 @@
   }
   .caption {
     min-height: 145px;
+  }
+  .toolbarActions {
+    width: 100%;
+  }
+  .toolbarActions > *:first-child {
+    flex: 1;
   }
 }

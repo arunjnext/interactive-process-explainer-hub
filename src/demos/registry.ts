@@ -33,12 +33,19 @@ export const demos: readonly DemoDefinition[] = [
     updatedAt: "2026-09-10",
     sources: [],
     load: () => import("./page-seo-foundation/PageSeoFoundation"),
+    embedLoad: () => import("./page-seo-foundation/PageSeoFoundationEmbed"),
   },
   // demo:new definitions
 ];
 
 export const demoComponents = new Map(
   demos.map((demo) => [demo.slug, lazy(demo.load)]),
+);
+
+export const embedDemoComponents = new Map(
+  demos.flatMap((demo) =>
+    demo.embedLoad ? [[demo.slug, lazy(demo.embedLoad)] as const] : [],
+  ),
 );
 
 export function findDemo(slug: string) {

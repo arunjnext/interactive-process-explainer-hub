@@ -21,4 +21,5 @@ export interface DemoDefinition {
   updatedAt: string;
   sources: readonly SourceReference[];
   load: () => Promise<{ default: ComponentType }>;
+  embedLoad?: () => Promise<{ default: ComponentType }>;
 }

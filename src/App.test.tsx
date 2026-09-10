@@ -70,6 +70,30 @@ describe("application routes", () => {
     ).toBeInTheDocument();
   });
 
+  it("renders the walkthrough embed without site or lesson chrome", async () => {
+    const { container } = renderAt("/demos/page-seo-foundation/embed");
+
+    expect(
+      await screen.findByRole("main", {
+        name: "How the Page SEO foundation works interactive embed",
+      }),
+    ).toBeInTheDocument();
+    expect(
+      await screen.findByLabelText("Interactive foundation walkthrough"),
+    ).toBeInTheDocument();
+    expect(container.querySelector("header")).not.toBeInTheDocument();
+    expect(container.querySelector("footer")).not.toBeInTheDocument();
+    expect(
+      container.querySelector('[data-section="eli5"]'),
+    ).not.toBeInTheDocument();
+    expect(
+      container.querySelector('[data-section="technical"]'),
+    ).not.toBeInTheDocument();
+    expect(
+      container.querySelector('[data-section="edge-case"]'),
+    ).not.toBeInTheDocument();
+  });
+
   it("handles unknown demos and unknown routes", () => {
     const { unmount } = renderAt("/demos/unknown");
     expect(
