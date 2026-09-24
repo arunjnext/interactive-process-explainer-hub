@@ -33,7 +33,9 @@ test("renderer filter uses the shared shadcn select", async ({ page }) => {
   await page.getByRole("combobox", { name: "Renderer" }).click();
   await page.getByRole("option", { name: "DOM / SVG" }).click();
   await expect(
-    page.getByRole("heading", { name: "No matching signals" }),
+    page.getByRole("link", {
+      name: "Open What a page visit saves in Change History",
+    }),
   ).toBeVisible();
   await expect(
     page.getByRole("link", {

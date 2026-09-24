@@ -1,0 +1,248 @@
+.stack {
+  display: grid;
+  min-width: 0;
+  gap: 1rem;
+  padding-bottom: 4rem;
+}
+.stack[data-embedded="true"] {
+  padding: 0;
+}
+.miniFlow {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+.miniFlow span {
+  padding: 0.5rem 0.7rem;
+  background: var(--muted);
+  border-radius: var(--radius);
+  font-weight: 500;
+}
+.miniFlow svg {
+  width: 1rem;
+  color: var(--muted-foreground);
+}
+.sourceDetails {
+  margin-top: 0.7rem;
+  color: var(--muted-foreground);
+  font-size: 0.83rem;
+}
+.sourceDetails summary {
+  width: fit-content;
+  cursor: pointer;
+  color: var(--foreground);
+}
+.sourceDetails ol {
+  padding-left: 1.25rem;
+  line-height: 1.6;
+}
+.sourceDetails li {
+  margin: 0.3rem 0;
+}
+.sourceDetails code {
+  overflow-wrap: anywhere;
+}
+.toolbar {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-bottom: 0.85rem;
+}
+.visits {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  min-width: 0;
+}
+.stageTrack {
+  display: flex;
+  gap: 0.25rem;
+  min-width: 0;
+  margin-bottom: 1rem;
+}
+.stageButton {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  min-width: 0;
+  flex: 1;
+  padding: 0.4rem 0.25rem;
+  border: 0;
+  border-bottom: 2px solid var(--border);
+  color: var(--muted-foreground);
+  background: transparent;
+  font: inherit;
+  font-size: 0.7rem;
+  line-height: 1.25;
+  text-align: left;
+}
+.stageButton[data-active="true"] {
+  border-color: var(--foreground);
+  color: var(--foreground);
+  font-weight: 600;
+}
+.stageButton[data-complete="true"] {
+  border-color: var(--muted-foreground);
+  color: var(--foreground);
+}
+.stageButton span:first-child {
+  display: grid;
+  place-items: center;
+  flex: 0 0 1.1rem;
+  width: 1.1rem;
+  height: 1.1rem;
+  border-radius: 50%;
+  background: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+.stageButton span:last-child {
+  overflow-wrap: anywhere;
+}
+.diagram {
+  display: grid;
+  grid-template-columns:
+    minmax(0, 1fr) 1rem minmax(0, 1fr) 1rem minmax(0, 1fr)
+    1rem minmax(0, 1fr);
+  align-items: center;
+  gap: 0.4rem;
+  min-width: 0;
+}
+.node {
+  min-height: 7rem;
+  min-width: 0;
+  padding: 0.85rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--card);
+  color: var(--muted-foreground);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.8rem;
+}
+.node[data-active="true"] {
+  border-color: var(--foreground);
+  box-shadow: 0 0 0 1px var(--foreground);
+  color: var(--foreground);
+}
+.node[data-complete="true"] {
+  color: var(--foreground);
+}
+.nodeHead {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  min-width: 0;
+  font-size: 0.76rem;
+}
+.nodeHead svg {
+  width: 1rem;
+  height: 1rem;
+  flex: none;
+}
+.node strong {
+  color: var(--foreground);
+  font-size: 1rem;
+  overflow-wrap: anywhere;
+}
+.arrow {
+  width: 1rem;
+  height: 1rem;
+  color: var(--border);
+}
+.arrow[data-on="true"] {
+  color: var(--foreground);
+}
+.comparison {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 1.3rem minmax(0, 1fr);
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 1rem;
+  padding: 0.7rem 0.9rem;
+  background: var(--muted);
+  border-radius: var(--radius);
+}
+.comparison > div {
+  min-width: 0;
+  display: grid;
+  gap: 0.15rem;
+}
+.comparison span {
+  color: var(--muted-foreground);
+  font-size: 0.72rem;
+}
+.comparison strong {
+  font-size: 0.95rem;
+  overflow-wrap: anywhere;
+}
+.comparison > svg {
+  width: 1.1rem;
+  color: var(--muted-foreground);
+}
+.current {
+  min-height: 5.2rem;
+  margin-top: 0.9rem;
+}
+.current > span {
+  color: var(--muted-foreground);
+  font-size: 0.73rem;
+}
+.current h3 {
+  margin: 0.1rem 0 0.2rem;
+  font-size: 1.04rem;
+}
+.current p {
+  margin: 0;
+  color: var(--muted-foreground);
+}
+.current > strong {
+  display: inline-block;
+  margin-top: 0.35rem;
+}
+.controls {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.6rem;
+}
+.footnote {
+  color: var(--muted-foreground);
+  margin: 0;
+  line-height: 1.5;
+}
+@media (max-width: 800px) {
+  .diagram {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0.35rem;
+  }
+  .diagram > .arrow {
+    display: none;
+  }
+  .node {
+    min-height: 6.5rem;
+    padding: 0.6rem;
+  }
+}
+@media (max-width: 540px) {
+  .stageTrack {
+    flex-wrap: wrap;
+  }
+  .stageButton {
+    flex: 1 1 31%;
+  }
+  .diagram {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .node {
+    min-height: 5.5rem;
+  }
+  .comparison {
+    gap: 0.3rem;
+    padding: 0.6rem;
+  }
+}

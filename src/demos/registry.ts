@@ -35,6 +35,18 @@ export const demos: readonly DemoDefinition[] = [
     load: () => import("./page-seo-foundation/PageSeoFoundation"),
     embedLoad: () => import("./page-seo-foundation/PageSeoFoundationEmbed"),
   },
+  {
+    slug: "page-change-history",
+    title: "What a page visit saves in Change History",
+    summary:
+      "Follow a page visit into compact state, baseline, skipped revisit, and a saved title-change event.",
+    tags: ["serp lens", "change history", "electron", "page analysis"],
+    renderer: "dom",
+    updatedAt: "2026-09-24",
+    sources: [],
+    load: () => import("./page-change-history/PageChangeHistory"),
+    embedLoad: () => import("./page-change-history/PageChangeHistoryEmbed"),
+  },
   // demo:new definitions
 ];
 
